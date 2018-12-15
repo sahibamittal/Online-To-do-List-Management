@@ -12,4 +12,4 @@ The development environment for this application requires the following tools:
 4. Sqlite3 for small scale database
 5. Web server – Apache
 
-Please refer the attcahed report for detailed designing.
+Please refer the attached report for detailed designing.
