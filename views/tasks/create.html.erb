@@ -1,0 +1,19 @@
+<h1>Enter the details of new task</h1>
+<br><br>
+<%= form_tag("create" ,  {:method => 'get', :class => "nifty_form"}) do %>
+  <div>
+    Task Name : <%= text_field_tag 'name' %><br><br>
+    Description : <%= text_area_tag 'description' %><br><br>
+    Priority (1 or 2) (1 = High, 2 = Low) : <%= text_field_tag 'priority' %><br><br>
+    <%= hidden_field_tag :userid, params[:userid] %><br><br><br>
+    <%= submit_tag 'CREATE' %><br><br>
+  </div>
+<% end %>
+
+<% if @task then %>
+  <p> Task with task_id : <%= @task.id %> has been created successfully!<br>
+<!--    Please <%#= link_to "login", :controller => "credentials", :action => "login" %> to start managing your tasks.-->
+  </p><br><br>
+<% end %>
+
+<footer><p> <%= link_to "Back to Homepage", :controller => "tasks", :action => "show", :userid => params[:userid]%></p></footer>

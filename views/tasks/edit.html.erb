@@ -1,0 +1,26 @@
+<h1>Edit the task below : </h1>
+<br><br>
+<% @taskid = params[:taskid]
+%>
+
+<%= form_tag("edit" ,  {:method => 'get', :class => "nifty_form"}) do %>
+  <p>
+    <% @taskedited = Task.find_by_id(@taskid) %>
+    Task Name : <%= text_field_tag 'name', @taskedited.name %><br><br>
+    Description : <%= text_area_tag 'description', @taskedited.description %><br><br>
+    Priority (1 or 2) (1 = High, 2 = Low) : <%= text_field_tag 'priority', @taskedited.priority %><br><br><br>
+    <%= hidden_field_tag :taskid, params[:taskid] %>
+    <%= hidden_field_tag :userid, params[:userid] %>
+    <%= submit_tag 'UPDATE' %><br><br><br>
+  </p>
+<% end %>
+
+
+<% if @task then %>
+  <p> Task with task_id : <%= @task.id %> has been updated successfully!<br>
+    <!--    Please <%#= link_to "login", :controller => "credentials", :action => "login" %> to start managing your tasks.-->
+  </p><br><br><br>
+<% end %>
+
+
+<footer><p> <%= link_to "Back to Homepage", :controller => "tasks", :action => "show", :userid => params[:userid] %></p></footer>

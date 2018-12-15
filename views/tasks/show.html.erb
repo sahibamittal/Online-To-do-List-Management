@@ -1,0 +1,37 @@
+<h1>Homepage - Manage Tasks</h1>
+<br>
+<%if @user then %><br>
+  <% @userid = @user.id %>
+  <footer class="NameLblPos">Hi, <%= @user.fname %></footer>
+  <h3> My Tasks : </h3><br><br><br><br><br>
+  <table>
+    <tr>
+      <th>Task ID</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Priority (High->Low)</th>
+      <th>Created at</th>
+      <th>Updated at</th>
+    </tr>
+    <% @tasks = @user.tasks()
+       @tasks = @tasks.sort_by &:priority
+       @tasks.each do |task|%>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= task.priority %></td>
+        <td><%= task.created_at %></td>
+        <td><%= task.updated_at %></td>
+        <td><%= link_to "Edit", :controller => "tasks", :action => "edit", taskid: task.id, userid: task.user_id %></td>
+        <td><%= link_to "Delete", :controller => "tasks", :action => "delete", confirm: "Are you sure?", taskid: task.id, userid: task.user_id %></td>
+        <td><%= link_to "Share", :controller => "tasks", :action => "share", taskid: task.id, userid: task.user_id %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  </p><br><br>
+  <h3><%= link_to "Add a new task", :controller => "tasks", :action => "create", userid: @userid %></h3>
+<% end %>
+
+

@@ -1,0 +1,43 @@
+<h1></h1>
+<br><br>
+<% @taskid = params[:taskid]
+%>
+<table>
+  <tr>
+    <th>Task ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Priority (High->Low)</th>
+    <th>Created at</th>
+    <th>Updated at</th>
+  </tr>
+  <% @task_to_del = Task.find_by_id(@taskid)
+  if @task_to_del then %>
+    <tr>
+      <td><%= @task_to_del.id %></td>
+      <td><%= @task_to_del.name %></td>
+      <td><%= @task_to_del.description %></td>
+      <td><%= @task_to_del.priority %></td>
+      <td><%= @task_to_del.created_at %></td>
+      <td><%= @task_to_del.updated_at %></td>
+    </tr>
+    <% end %>
+</table>
+<br><br>
+
+<% if !@deleted then %>
+<p>
+  Are you sure you want to delete this task?
+  <%= link_to "Yes", :controller => "tasks", :action => "delete", :userid => params[:userid], :delete_confirm => "yes", :taskid => params[:taskid] %>
+  <%= link_to "No", :controller => "tasks", :action => "show", :userid => params[:userid] %>
+</p>
+<br><br>
+<% end %>
+
+<% if @deleted then %>
+  <p> Task deleted successfully!<br>
+   </p><br><br>
+<% end %>
+
+
+<footer><p> <%= link_to "Back to Homepage", :controller => "tasks", :action => "show", :userid => params[:userid] %></p></footer>

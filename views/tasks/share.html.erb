@@ -1,0 +1,25 @@
+<h4>Please enter the username of other user you want to share the task with : </h4><br>
+<p>NOTE : Other user must be registered with ToDos</p>
+<p>Once you share the task, it would appear in their task list.</p><br><br><br>
+
+<% @taskid = params[:taskid]
+%>
+
+<%= form_tag("share",  {:method => 'get'}) do %>
+  <div>
+    Username : <%= text_field_tag 'username' %><br><br>
+    <%= hidden_field_tag :taskid, params[:taskid] %>
+    <%= hidden_field_tag :userid, params[:userid] %>
+    <%= submit_tag 'SHARE' %><br><br><br>
+  </div>
+<% end %>
+
+
+<% if @task && @shared then %>
+  <p> Task with task_id : <%= @task.id %> has been shared successfully!<br>
+    <!--    Please <%#= link_to "login", :controller => "credentials", :action => "login" %> to start managing your tasks.-->
+  </p><br><br><br>
+<% end %>
+
+
+<footer><p> <%= link_to "Back to Homepage", :controller => "tasks", :action => "show", :userid => params[:userid] %></p></footer>
